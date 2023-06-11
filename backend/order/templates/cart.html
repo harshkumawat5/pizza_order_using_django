@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block start %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.NO</th>
+        <th scope="col">product</th>
+        <th scope="col">name</th>
+        <th scope="col">price</th>
+        <th scope="col">qty</th>
+        <th scope="col">total</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for cartitem in carts.cart_items.all %}
+      <tr>
+       
+        <th scope="row">{{forloop.counter}}</th>
+        <td>
+            <img src="/media/{{cartitem.pizza.images}}" alt="nothing to show" style="height:200px;width:200px"></img>
+        </td>
+        <td>{{cartitem.pizza.pizza_name}}</td>
+        <td>{{cartitem.pizza.price}}</td>
+        <td>1</td>
+        <td>{{cartitem.pizza.price}}</td>
+        <th>
+            <a href="{% url 'remove_cart_item' cartitem.uid %}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+        </th>
+        
+    </tr>
+    {% endfor %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        <td>
+            <b>Grand total</b>
+            <br>
+            {% if carts.get_cart_total %}
+            <p>{{carts.get_cart_total}}</p>
+            {% else %}
+            <p>0</p>
+            {% endif %}
+            {% if carts.get_cart_total %} 
+            <a href="{{payment_url}}" class="btn btn-primary">Pay now {{carts.get_cart_total}}</a>
+            {% endif %} 
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+{% endblock %}

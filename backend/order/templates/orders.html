@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block start %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.NO</th>
+       
+        <th scope="col">Date</th>
+
+        <th scope="col">Price</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        
+        <td>
+          {{order.created_at}}
+      </td>
+        <td>
+            {{order.get_cart_total}}
+        </td>
+       
+       
+        
+        
+        
+    </tr>
+    {% endfor %}
+        
+     
+    </tbody>
+  </table>
+
+{% endblock %}
